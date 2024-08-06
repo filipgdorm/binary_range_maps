@@ -1,0 +1,3 @@
+[submodule "sinr"]
+	path = sinr
+	url = https://github.com/elijahcole/sinr.git
