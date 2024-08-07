@@ -9,7 +9,12 @@ these predictions is non-trivial, since different species can require different 
 of additional pseudo-absence data, along with ones that only require presence data. We also propose an extension of an existing presence-only technique that is more robust to outliers. We perform a detailed evaluation of different thresholding techniques on the tasks of binary range estimation and large-scale fine-grained visual classification, and we demonstrate
 improved performance over existing approaches using our technique.
 
-
+<table>
+  <tr>
+    <td valign="top"><img src="images/maps.png" width="450"></td>
+   </tr> 
+    <td align="left">GPT-4's Australia outline prediction from a single prompt and after 6 steps of improvement through dialogue.</td>
+</table>
 
 ## 🔍 Getting Started 
 
@@ -44,12 +49,13 @@ To use the models in the paper, simply run the following command:
 curl xxx
 ```
 
-## 🗺️ Generating Predictions
+## 🗺️ Evaluating Methods
+The evaluation process consists of two steps: 
+
+1. Generate the thresholds for taxa of interest through any of the methods in `threshold_generation/*`.
+2. Pass thresholds and taxons generated as a `.csv` file to `evaluation.py`
 
 
-## 🚅 Evaluating Models
-
-To evaluate a model, run the following command:
 
 ##  🙏 Acknowledgements
 
