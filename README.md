@@ -11,9 +11,9 @@ improved performance over existing approaches using our technique.
 
 <table>
   <tr>
-    <td valign="top"><img src="images/maps.png" width="450"></td>
+    <td valign="top" align="center" style="text-align: center;"><img src="images/maps.png" width="450"></td>
    </tr> 
-    <td align="center">Qualitative examples of estimated binary ranges. Each row depicts a different species, and the columns show the expert-derived range, output from the Target Sampling, and LPT-R approaches, respectively. Inset, we also display the different types of errors. We use an ocean mask for visualization purposes. .</td>
+    <td align="left">Qualitative examples of estimated binary ranges. Each row depicts a different species, and the columns show the expert-derived range, output from the Target Sampling, and LPT-R approaches, respectively. Inset, we also display the different types of errors. We use an ocean mask for visualization purposes. .</td>
 </table>
 
 ## 🔍 Getting Started 
