@@ -13,7 +13,7 @@ improved performance over existing approaches using our technique.
   <tr>
     <td valign="top"><img src="images/maps.png" width="450"></td>
    </tr> 
-    <td align="left">GPT-4's Australia outline prediction from a single prompt and after 6 steps of improvement through dialogue.</td>
+    <td align="center">Qualitative examples of estimated binary ranges. Each row depicts a different species, and the columns show the expert-derived range, output from the Target Sampling, and LPT-R approaches, respectively. Inset, we also display the different types of errors. We use an ocean mask for visualization purposes. .</td>
 </table>
 
 ## 🔍 Getting Started 
