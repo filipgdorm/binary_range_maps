@@ -91,6 +91,8 @@ def f1_at_thresh(y_true, y_pred, thresh, type = 'binary'):
     return f1_score(y_true, y_thresh, average=type)
 
 per_species_f1 = np.zeros((len(species_ids)))
+per_species_thres = np.zeros((len(species_ids)))
+
 for tt_id, taxa in tqdm(enumerate(species_ids), total=len(species_ids)):
     wt_1 = wt[tt_id,:]
     preds = torch.sigmoid(torch.matmul(loc_emb, wt_1)).cpu().numpy()
@@ -100,22 +102,23 @@ for tt_id, taxa in tqdm(enumerate(species_ids), total=len(species_ids)):
         y_test = np.zeros(preds.shape, int)
         y_test[species_locs] = 1
         precision, recall, thresholds = precision_recall_curve(y_test, preds)
-        p1 = (2 * precision * recall)
-        p2 = (precision + recall)
-        out = np.zeros( (len(p1)) )
-        fscore = np.divide(p1,p2, out=out, where=p2!=0)
-        per_species_f1[tt_id] = fscore.max()
+        
     elif args.evaluation_set == "snt":
         cur_loc_indices = np.array(loc_indices_per_species[tt_id])
         cur_labels = np.array(labels_per_species[tt_id])
         pred = preds[cur_loc_indices]
         precision, recall, thresholds = precision_recall_curve(cur_labels, pred)
-        p1 = (2 * precision * recall)
-        p2 = (precision + recall)
-        out = np.zeros( (len(p1)) )
-        fscore = np.divide(p1,p2, out=out, where=p2!=0)
-        per_species_f1[tt_id] = fscore.max()
+    p1 = (2 * precision * recall)
+    p2 = (precision + recall)
+    out = np.zeros( (len(p1)) )
+    fscore = np.divide(p1,p2, out=out, where=p2!=0)
+    index = np.argmax(fscore)
+    thres = thresholds[index]
+    max_fscore = fscore[index]
+    per_species_f1[tt_id] = max_fscore
+    per_species_thres[tt_id] = thres
 
 mean_f1 = np.mean(per_species_f1)
 logging.info(f"Mean f1 score: {mean_f1}")
 np.save(output_dir+"/f1_scores.npy", per_species_f1)
+np.save(output_dir+"/opt_thres.npy", per_species_thres)

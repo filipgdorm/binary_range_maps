@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
+import os
 from sklearn.metrics import precision_recall_curve
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 def lpt_x (gdfk ,train_df_h3, presence_absence, class_id, preds, lpt_level):
     gdfk["pred"] = preds
@@ -57,8 +61,78 @@ def rdm_sampling(gdfk ,train_df_h3, presence_absence, class_id, preds, num_absen
     thres = thresholds[index]
     return thres
 
-def mlp_classifier():
-    pass
+def mlp_classifier(upper_b_dir, wt, species_ids):
+    y_path = upper_b_dir + "/opt_thres.npy"
+    if not os.path.exists(y_path):
+        print(f"Error: {y_path} not found. Please run the script upper_bound.py for this model that generates 'opt_thres.npy' first.")
+        raise SystemExit("Execution stopped due to missing required file.")
+    
+    X = wt.numpy()
+    y = np.load(y_path)
+    # Define the number of categories
+    num_categories = 20
+    # Calculate bin edges
+    bin_edges = np.linspace(0,1, num_categories + 1)
+    # Assign categories
+    y = np.digitize(y, bin_edges) - 1
+    np.random.seed(42)
+    num_samples = len(X)
+    random_indices = np.random.choice(num_samples, size=int(num_samples * 0.75), replace=False)
+    # Creating a boolean mask
+    mask = np.full(num_samples, False)
+    mask[random_indices] = True
+    # Split the dataset into training and testing sets based on the random indices
+    X_train_thres, X_test_thres = X[mask], X[~mask]
+    y_train_thres, y_test_thres = y[mask], y[~mask]
+    # Scale the data
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train_thres)
+    X_test_scaled = scaler.transform(X_test_thres)
+    # Create an MLP Classifier object
+    mlp_classifier = MLPClassifier(hidden_layer_sizes=(200,100), random_state=42)
+    # Train the MLP Classifier on the training data
+    mlp_classifier.fit(X_train_scaled, y_train_thres)
+    # Predict categories for the testing data
+    predictions = mlp_classifier.predict(X_test_scaled)
+    class_to_thres = np.arange(0.025, 1, 0.05)
+    thresolds = class_to_thres[predictions]
+    species_ids_subset = np.array(species_ids)[~mask]
 
-def rf_classifier():
-    pass
+    return species_ids_subset, thresolds
+
+def rf_classifier(upper_b_dir, wt, species_ids):
+    y_path = upper_b_dir + "/opt_thres.npy"
+    # Check if y_path exists
+    if not os.path.exists(y_path):
+        print(f"Error: {y_path} not found. Please run the script upper_bound.py for this model that generates 'opt_thres.npy' first.")
+        raise SystemExit("Execution stopped due to missing required file.")
+    
+    X = wt.numpy()
+    y = np.load(y_path)
+    # Define the number of categories
+    num_categories = 20
+    # Calculate bin edges
+    bin_edges = np.linspace(0,1, num_categories + 1)
+    # Assign categories
+    y_cat = np.digitize(y, bin_edges) - 1
+    y = y_cat
+    np.random.seed(42)
+    num_samples = len(X)
+    random_indices = np.random.choice(num_samples, size=int(num_samples * 0.75), replace=False)
+    # Creating a boolean mask
+    mask = np.full(num_samples, False)
+    mask[random_indices] = True
+    # Split the dataset into training and testing sets based on the random indices
+    X_train_thres, X_test_thres = X[mask], X[~mask]
+    y_train_thres, y_test_thres = y[mask], y[~mask]
+    # Create a Random Forest Classifier object
+    rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+    # Train the Random Forest Classifier on the training data
+    rf_classifier.fit(X_train_thres, y_train_thres)
+    # Predict categories for the testing data
+    predictions = rf_classifier.predict(X_test_thres)
+    class_to_thres = np.arange(0.025, 1, 0.05)
+    thresolds = class_to_thres[predictions]
+    species_ids_subset = np.array(species_ids)[~mask]
+
+    return species_ids_subset, thresolds

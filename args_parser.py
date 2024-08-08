@@ -11,10 +11,11 @@ def parse_args():
                  'tgt_sampling', 
                  'rf_classifier', 
                  'mlp_classifier', 
-                 'single_fixed_thres'
+                 'single_fixed_thres',
+                 'mean_pred_thres'
                  ],
         required=True,
-        help="Choose one of the available options: lpt_x, rdm_sampling, tgt_sampling, rf_classifier, mlp_classifier, single_fixed_thres"
+        help="Choose one of the available options: lpt_x, rdm_sampling, tgt_sampling, rf_classifier, mlp_classifier, single_fixed_thres, mean_pred_thres"
     )
     parser.add_argument(
         '--species_set',
@@ -25,10 +26,9 @@ def parse_args():
     )
     parser.add_argument("--model_path", type=str, required=True, help="Model path.")
     parser.add_argument("--exp_name", type=str, required=True, default='test', help="Experiment name")
-    parser.add_argument("--counter", type=int, default=0, help="Counter value")
 
     # First parse to get the method
-    args, remaining_args = parser.parse_known_args()
+    args, _ = parser.parse_known_args()
 
     # Create a new parser for the method-specific arguments
     method_parser = argparse.ArgumentParser()
