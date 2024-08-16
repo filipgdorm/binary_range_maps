@@ -73,4 +73,3 @@ The evaluation process consists of two steps:
 
 
 ## 📜 Disclaimer
-Extreme care should be taken before making any decisions based on the outputs of models presented here. Our models are trained on biased data and have not been calibrated or validated beyond the experiments illustrated in the paper. 
