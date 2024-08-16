@@ -18,8 +18,8 @@ import utils
 args = parse_args()
 
 # Construct the absolute paths to the data files
-gdfk_path = "./pa_data/gdfk.csv"
-train_df_h3_path = "./pa_data/train_df_h3.csv"
+gdfk_path = "./threshold_dataset/gdfk.csv"
+train_df_h3_path = "./threshold_dataset/train_df_h3.csv"
 iucn_json_path = "./sinr/data/eval/iucn/iucn_res_5.json"
 snt_npy_path = "./sinr/data/eval/snt/snt_res_5.npy"
 
