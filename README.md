@@ -1,4 +1,4 @@
-# Generating Binary Range Maps
+# WIP! Generating Binary Range Maps
 
 Code for binarizing the output of global-scale species range estimation models. This code enables the recreation of the results from our workshop paper [link]
 
