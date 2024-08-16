@@ -37,8 +37,8 @@ def parse_args():
     if args.method == 'lpt_x':
         method_parser.add_argument(
             '--lpt_level',
-            type=int,
-            default=0,
+            type=float,
+            default=0.0,
             help="Specify the level for lpt-x method"
         )
     elif args.method == 'rdm_sampling':
@@ -54,6 +54,13 @@ def parse_args():
             '--factor_presences',
             type=float,
             help="Specify a factor (proportion) of the number of presences to generate absences."
+        )
+    elif args.method == 'single_fixed_thres':
+        method_parser.add_argument(
+            '--thres',
+            type=float,
+            default=0.5,
+            help="Specify the level for the single fixed threshold."
         )
 
     # Parse all arguments including the conditional ones

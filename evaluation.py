@@ -18,7 +18,6 @@ import logging
 parser = argparse.ArgumentParser(description="Script to process thresholds and perform an experiment.")
 parser.add_argument("--model_path", type=str, required=True, help="Model path.")
 parser.add_argument("--exp_name", type=str, default='test', help="Experiment name")
-parser.add_argument("--counter", type=int, default=0, help="Counter")
 parser.add_argument(
         '--evaluation_set',
         type=str,
