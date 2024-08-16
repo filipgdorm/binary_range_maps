@@ -77,11 +77,11 @@ with torch.no_grad():
 
 #If thresholding method relies on classifier we generate the thresholds in one go. Otherwise species by species.
 if args.method == "mlp_classifier":
-    upper_b_dir = os.path.join("upper_bounds",args.model_path.split("/")[-2],args.species_set)
+    upper_b_dir = os.path.join("results/upper_bounds",args.model_path.split("/")[-2],args.species_set)
     taxa, thres = mlp_classifier(upper_b_dir, wt, species_ids)
     output_pd = pd.DataFrame({'taxon_id': taxa, 'thres': thres})
 elif args.method == "rf_classifier":
-    upper_b_dir = os.path.join("upper_bounds",args.model_path.split("/")[-2],args.species_set)
+    upper_b_dir = os.path.join("results/upper_bounds",args.model_path.split("/")[-2],args.species_set)
     taxa, thres = rf_classifier(upper_b_dir, wt, species_ids)
     output_pd = pd.DataFrame({'taxon_id': taxa, 'thres': thres})
 else:
@@ -95,9 +95,9 @@ else:
         elif args.method == "tgt_sampling":
             thres = tgt_sampling(gdfk ,train_df_h3, presence_absence, class_id, preds)
         elif args.method == "rdm_sampling":
-            thres = rdm_sampling(gdfk ,train_df_h3, presence_absence, class_id, preds, args.raw_presences, args.factor_presences)
+            thres = rdm_sampling(gdfk ,train_df_h3, presence_absence, class_id, preds, args.raw_number, args.factor_presences)
         elif args.method == "single_fixed_thres":
-            thres=0.5  #change single fixed thres to allow for arbitrary value.
+            thres=args.threshold
         elif args.method == "mean_pred_thres":
             thres = preds.mean()
         row = {

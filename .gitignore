@@ -1,5 +1,9 @@
 #
 sinr/data
+pretrained_models
+threshold_dataset/*.csv
+results/*
+upper_bounds/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
