@@ -30,6 +30,20 @@ improved performance over existing approaches using our technique.
 
 ## 🔍 Getting Started 
 
+#### Cloning The Repository
+This repository contains the submodule [SINR](https://github.com/elijahcole/sinr).
+
+To clone this repo with the submodule run:
+```bash
+git clone --recurse-submodules https://github.com/filipgdorm/binary_range_maps.git
+```
+
+Alternatively, if the repo has already been cloned, the submodule can be installed by running the following commands within the repo:
+```bash
+git submodule init
+git submodule update
+```
+
 #### Installing Required Packages
 
 1. We recommend using an isolated Python environment to avoid dependency issues. Install the Anaconda Python 3.9 distribution for your operating system from [here](https://www.anaconda.com/download). 
@@ -44,28 +58,30 @@ improved performance over existing approaches using our technique.
 ```bash
  pip3 install -r requirements.txt
 ```
-
-#### Downloading the SINR Code
-This range map binarization is an extension of https://github.com/elijahcole/sinr which needs to be cloned as a folder into this repo (such that there is a folder `sinr/*`). [note to self: depending on if shipped with clone, include setup instructions or not]
+Note that this should be the `requirements.txt` in the root directory, NOT the one inside the submodule.
 
 
 #### SINR Data Download and Preparation
 Instructions for downloading the SINR data, which is needed for further experiments, are in `sinr/data/README.md`.
 
+Additionally, to generate data files necessary for the thresholding methods, navigate to the `thresholding_dataset` directory and then run:
+```bash
+python generate_dataset.py
+```
+which will create the files `gdfk.csv` and `train_df_h3.csv`. The python script can be modified to use a different random initialization of the data, and to use a different resolution of the H3 library.
+
+#### Downloading models
+To download the zipped folder containing the models in the paper:
+https://datasync.ed.ac.uk/index.php/s/tDLE4s4cVJYpkpn
+
+The file is password protected, enter the password "`models`".
+Unzip the file and make sure that it is in the root directory.
+
+
 #### Data setup for pseudo-absence generation
 In order to create pseudo-absences, the training data needs to be formatted.
 
-#### Downloading models
-To use the models in the paper, simply run the following command:
-```
-curl xxx
-```
-
 ## 🗺️ Evaluating Methods
-The evaluation process consists of two steps: 
-
-1. Generate the thresholds for taxa of interest through any of the methods in `threshold_generation/*`.
-2. Pass thresholds and taxons generated as a `.csv` file to `evaluation.py`
 
 
 
