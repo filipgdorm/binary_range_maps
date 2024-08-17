@@ -117,17 +117,19 @@ if args.eval_type == "single_best_thres":
     # Generate linearly spaced numbers in the range [0, 1]
     linspace_values = np.linspace(0.05, 1, num=num_points, endpoint=False)
     lin_threshs = linspace_values
-    per_species_f1 = np.zeros((len(species_ids),len(lin_threshs)))
+    per_species_f1 = np.zeros((len(taxon_ids),len(lin_threshs)))
 else:
     per_species_f1 = np.zeros((len(taxon_ids)))
     per_species_thres = np.zeros((len(taxon_ids)))
+
+print(per_species_f1.shape)
 
 for tt_id, taxa in tqdm(enumerate(taxon_ids), total=len(taxon_ids)):
     wt_1 = wt[tt_id,:]
     preds = torch.sigmoid(torch.matmul(loc_emb, wt_1)).cpu().numpy()
 
     if args.evaluation_set == "iucn":
-        species_locs = data['taxa_presence'].get(taxa)
+        species_locs = data['taxa_presence'].get(str(taxa))
         y_test = np.zeros(preds.shape, int)
         y_test[species_locs] = 1
         pred = preds
