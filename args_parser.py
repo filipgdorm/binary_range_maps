@@ -30,15 +30,12 @@ def parse_args():
     # First parse to get the method
     args, _ = parser.parse_known_args()
 
-    # Create a new parser for the method-specific arguments
-    method_parser = argparse.ArgumentParser()
-
     # Conditionally add arguments based on the method
     if args.method == 'lpt_x':
-        method_parser.add_argument(
+        parser.add_argument(
             '--lpt_level',
             type=float,
-            default=0.0,
+            default=5.0,
             help="Specify the level for lpt-x method"
         )
     elif args.method == 'rdm_sampling':
@@ -58,7 +55,7 @@ def parse_args():
             help="Specify a factor (proportion) of the number of presences to generate absences."
         )
     elif args.method == 'single_fixed_thres':
-        method_parser.add_argument(
+        parser.add_argument(
             '--threshold',
             type=float,
             default=0.5,

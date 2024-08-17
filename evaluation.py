@@ -122,8 +122,6 @@ else:
     per_species_f1 = np.zeros((len(taxon_ids)))
     per_species_thres = np.zeros((len(taxon_ids)))
 
-print(per_species_f1.shape)
-
 for tt_id, taxa in tqdm(enumerate(taxon_ids), total=len(taxon_ids)):
     wt_1 = wt[tt_id,:]
     preds = torch.sigmoid(torch.matmul(loc_emb, wt_1)).cpu().numpy()
