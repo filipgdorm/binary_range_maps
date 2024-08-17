@@ -1,9 +1,0 @@
-{
-    "masks": "../sinr/data/masks/",
-    "env": "../sinr/data/env/", 
-    "train": "../sinr/data/train/", 
-    "geo_prior": "../sinr/data/eval/geo_prior/",
-    "snt": "../sinr/data/eval/snt/", 
-    "iucn": "../sinr/data/eval/iucn/", 
-    "geo_feature": "../sinr/data/eval/geo_feature/"
-} 
