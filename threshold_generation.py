@@ -60,6 +60,8 @@ elif args.species_set == "snt":
     data = data.item()
     species_ids = data['taxa']
     if args.method in ["mlp_classifier", "rf_classifier"]: obs_locs = np.array(data['obs_locs'], dtype=np.float32) #in this case use same resolution as test set
+elif args.species_set == "all":
+    species_ids = train_params['params']['class_to_taxa']
 elif args.species_set == "custom":
      pass
 

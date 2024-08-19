@@ -20,7 +20,7 @@ def parse_args():
     parser.add_argument(
         '--species_set',
         type=str,
-        choices=['iucn', 'snt', 'custom'],
+        choices=['iucn', 'snt', 'all', 'custom'],
         default='iucn',
         help="Choose the species set."
     )
