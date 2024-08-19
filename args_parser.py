@@ -62,6 +62,16 @@ def parse_args():
             help="Specify the level for the single fixed threshold."
         )
 
+    # Conditionally add species IDs if species_set is 'custom'
+    if args.species_set == 'custom':
+        parser.add_argument(
+            '--species_ids',
+            type=int,
+            nargs='+',
+            required=True,
+            help="Specify the species IDs as a list of integers when 'custom' is chosen as the species set."
+        )
+
     # Parse all arguments including the conditional ones
     args = parser.parse_args()
 

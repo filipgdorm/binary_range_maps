@@ -63,14 +63,18 @@ elif args.species_set == "snt":
 elif args.species_set == "all":
     species_ids = train_params['params']['class_to_taxa']
 elif args.species_set == "custom":
-     pass
+    species_ids = np.array(args.species_ids)
 
 obs_locs = torch.from_numpy(obs_locs).to('cpu')
 loc_feat = enc.encode(obs_locs)
 
 classes_of_interest = torch.zeros(len(species_ids), dtype=torch.int64)
 for tt_id, tt in enumerate(species_ids):
-    class_of_interest = np.array([train_params['params']['class_to_taxa'].index(int(tt))])
+    try:
+        class_of_interest = np.array([train_params['params']['class_to_taxa'].index(int(tt))])
+    except ValueError:
+        # Inform the user about the invalid species ID and exit
+        raise ValueError(f"Invalid species ID {tt}: not found in the class_to_taxa list.")
     classes_of_interest[tt_id] = torch.from_numpy(class_of_interest)
 
 with torch.no_grad():
