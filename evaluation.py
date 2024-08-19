@@ -15,7 +15,7 @@ import utils
 import setup
 import logging
 
-parser = argparse.ArgumentParser(description="Script to process thresholds and perform an experiment.")
+parser = argparse.ArgumentParser(description="Script to evaluate binarized range maps.")
 parser.add_argument("--model_path", type=str, required=True, help="Model path.")
 parser.add_argument("--exp_name", type=str, default='test', help="Experiment name, also the dir where thresholds will be collected from.")
 parser.add_argument(

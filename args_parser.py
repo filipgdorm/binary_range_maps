@@ -2,7 +2,7 @@ import argparse
 
 def parse_args():
     # Initial parsing to get the method
-    parser = argparse.ArgumentParser(description="Script to process thresholds and perform an experiment.")
+    parser = argparse.ArgumentParser(description="Script to generate binarization thresholds.")
     parser.add_argument(
         '--method',
         type=str,

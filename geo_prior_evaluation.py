@@ -16,7 +16,7 @@ import utils
 import setup
 import logging
 
-parser = argparse.ArgumentParser(description="Script to process thresholds and perform an experiment.")
+parser = argparse.ArgumentParser(description="Script to evaluate methods as geo priors.")
 parser.add_argument("--model_path", type=str, default='model_an_full_input_enc_sin_cos_hard_cap_num_per_class_1000.pt', help="Model path.")
 parser.add_argument("--exp_name", type=str, default='test', help="Experiment name, also the dir where thresholds will be collected from.")
 parser.add_argument("--delta", type=float, default=0, help="Delta added to predictions.")
