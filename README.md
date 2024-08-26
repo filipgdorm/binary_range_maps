@@ -1,6 +1,6 @@
 # Generating Binary Range Maps
 
-Code for binarizing the output of global-scale species range estimation models. This code enables the recreation of the results from our workshop paper [link]
+Code for binarizing the output of global-scale species range estimation models. This code enables the recreation of the results from our [Computer Vision for Ecology Workshop](https://cv4e.netlify.app/) at ECCV 2024 paper [Generating Binary Species Range Maps](https://arxiv.org/abs/TODO). 
 
 
 <table>
@@ -23,7 +23,7 @@ improved performance over existing approaches using our technique.
 
 <table>
   <tr>
-    <td valign="top" align="center" style="text-align: center;"><img src="images/maps.png" width="450"></td>
+    <td valign="top" align="center" style="text-align: center;"><img src="images/maps.png" width="500"></td>
    </tr> 
     <td align="left">Qualitative examples of estimated binary ranges. Each row depicts a different species, and the columns show the expert-derived range, output from the Target Sampling, and LPT-R approaches, respectively. Inset, we also display the different types of errors. We use an ocean mask for visualization purposes.</td>
 </table>
@@ -71,7 +71,7 @@ python generate_dataset.py
 which will create the files `gdfk.csv` and `train_df_h3.csv`. The python script can be modified to use a different random initialization of the data, and to use a different resolution of the H3 library.
 
 #### Downloading Models
-To download the zipped folder containing the models in the paper:
+To download the zipped folder containing the models in the paper:  
 https://datasync.ed.ac.uk/index.php/s/tDLE4s4cVJYpkpn
 
 The file is password protected, enter the password "`models`".
@@ -120,11 +120,11 @@ where the user should provide either:
 Additionally, the user can set `--delta` to an arbitrary value. In the paper a value of 0.01 was used.
 
 ##  🙏 Citation
-```bash
-@inproceedings{binary_maps,
+```
+@inproceedings{binary_maps_cv4e_2024,
   title     = {{Generating Binary Species Range Maps}},
   author    = {Dorm, Filip and Lange, Christian and Loarie, Scott and Mac Aodha, Oisin},
-  booktitle = {CV4E Workshop},
+  booktitle = {Computer Vision for Ecology Workshop at ECCV},
   year = {2024}
 }
 ```
