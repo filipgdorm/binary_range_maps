@@ -1,6 +1,6 @@
 # Generating Binary Range Maps
 
-Code for binarizing the output of global-scale species range estimation models. This code enables the recreation of the results from our [Computer Vision for Ecology Workshop](https://cv4e.netlify.app/) at ECCV 2024 paper [Generating Binary Species Range Maps](https://arxiv.org/abs/TODO). 
+Code for binarizing the output of global-scale species range estimation models. This code enables the recreation of the results from our [Computer Vision for Ecology Workshop](https://cv4e.netlify.app/) at ECCV 2024 paper [Generating Binary Species Range Maps](https://arxiv.org/abs/2408.15956). 
 
 
 <table>
@@ -72,7 +72,7 @@ which will create the files `gdfk.csv` and `train_df_h3.csv`. The python script 
 
 #### Downloading Models
 To download the zipped folder containing the models in the paper:  
-https://datasync.ed.ac.uk/index.php/s/tDLE4s4cVJYpkpn
+https://datasync.ed.ac.uk/index.php/s/AHbMtzLNn6rlKwz
 
 The file is password protected, enter the password "`models`".
 Unzip the file and make sure that it is in the root directory.
